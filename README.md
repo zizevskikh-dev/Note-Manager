@@ -3,10 +3,10 @@
 
 ---
 ## The database includes next columns for each note:
-- `Date` - Date when a note was created | updated, **creates automatically**
+- `Date` - Date when a note was created | updated, **created automatically**
 - `Category` - Transaction category:
-  - `waste`  -  leads to reduce your balance *(changes* `Amount` *to a negative number)*
-  - `income` - leads to increase your balance
+  - `waste`  -  leads to a reduction in your balance *(changes* `Amount` *to a negative number)*
+  - `income` - leads to an increase in your balance
 - `Amount` - Note amount of money
 - `Description` - Note description*(optional column)*
 
@@ -26,7 +26,7 @@
 > ```
 
 ---
-## Note Manager supports the typical CRUD commands, and several addition functions:
+## Note Manager supports typical CRUD commands, and several addition functions:
 ### 0. Help `-h | --help`
 ```C
 > python manage.py -h
@@ -35,13 +35,13 @@
 
 ---
 ### 1. Create a new record `-c | -create`
-#### Create the note in the database by next additional arguments:
-`--cat` Add the number of transaction category to the new note:
+#### Create a note in the database by following additional arguments:
+`--cat` Add a number of transaction category to the new note:
   - `--cat 1` = "waste"
   - `--cat 2` = "income"
  
  `--amt`  Add a positive amount of money to the new note.
-* If the number of transaction category is `"waste"`, amount of money will change to a negative number **automatically.**
+* If the number of transaction category is `"waste"`, the amount of money will change to a negative number **automatically.**
 
 *Optional argument:*  
 `--desc` Add a description to the new note.
@@ -84,7 +84,7 @@ File "db.txt" has been created!
     ]  
 }
 ```
-#### Also, any first note leads to make  `db.txt` file:
+#### The creation of the first note also leads to the creation of `db.txt` file:
 
 ```
 Date: 2024-05-09  
@@ -115,32 +115,32 @@ Description: Cashback
 
 ---
 ### 3. Update the note `-u | -upd`
-#### Update the note from the database by next additional arguments:
-`--date` Add the previous date to the note that you want to update.
-`--cat` Add the previous number of transaction category to the note that you want to update:
+#### Update a note from the database by following additional arguments:
+`--date` Add the previous date to the note you want to update.
+`--cat` Add the previous number of transaction category to the note you want to update:
 - `--cat 1` = "waste"
 - `--cat 2` = "income"
 
-`--amt` Add previous positive amount of money to the note that you want to update.
-* If the number of transaction category is `"waste"`, amount of money will change to a negative number **automatically.**
+- `--amt` Add a previous positive amount of money to the note that you want to update.
+* If the number of transaction category is `"waste"`, the amount of money will change to a negative number **automatically.**
 
-`--decs` Add the previous description to the note that you want to update.
+`--decs` Add the previous description to the note you want to update.
 - **Skip this argument if an updated note doesn't have any description!**
 
-`--newcat` Add a new number of transaction category to the note that you want to update:
+`--newcat` Add a new number of transaction category to the note you want to update:
 - `--newcat 1` = "waste"
 - `--newcat` 2 = "income"
 
-`--newamt` Add a new positive amount of money to the note that you want to update.
-* If the number of transaction category is `"waste"`, amount of money will change to a negative number **automatically.**
+`--newamt` Add a new positive amount of money to the note you want to update.
+* If the number of transaction category is `"waste"`, the amount of money will change to a negative number **automatically.**
 
 *Optional argument:*
-`--newdesc` Add a new description to the note that you want to update.
+`--newdesc` Add a new description to the note you want to update.
 > **The order of arguments doesn't play any role.**
 #### Example:
 ```c
 > python manage.py -upd --amt 34.69 --cat 2 --desc Cashback --newcat 1  --date 2024-05-09  --newamt 42
-The update finished successful!
+The update finished successfully!
 
 ----------------------------------------
 Before the update:
@@ -162,7 +162,7 @@ Description:
 File "db.txt" has been updated!
 ****************************************
 ```
-#### Text file `db.txt` also has been updated automatically:
+#### Text file `db.txt` has also been updated automatically:
 ```
 Date: 2024-05-09  
 Category: waste  
@@ -175,16 +175,16 @@ Current balance is: -42.00
 
 ---
 ### 4. Delete the note `-d | -del`
-#### Update the note from the database by next additional arguments:
-`--date` Add a date to the note that you want to delete.
-`--cat` Add a number of transaction category to the note that you want to delete:
+#### Delete the note from the database by following additional arguments:
+`--date` Add a date to the note you want to delete.
+`--cat` Add a number of transaction category to the note you want to delete:
 - `--cat 1` = "waste"
 - `--cat 2` = "income"
 
-`--amt` Add a positive amount of money to the note that you want to delete.
-* If the number of transaction category is `"waste"`, amount of money will change to a negative number **automatically.**
+`--amt` Add a positive amount of money to the note you want to delete.
+* If the number of transaction category is `"waste"`, the amount of money will change to a negative number **automatically.**
 
-`--decs` Add a description to the note that you want to delete.
+`--decs` Add a description to the note you want to delete.
 - **Skip this argument if an updated note doesn't have any description!**
 > **The order of arguments doesn't play any role.**
 #### Example:
@@ -203,25 +203,25 @@ Description:
 ****************************************
 Database is empty
 ****************************************
-The file "db.txt" has been deleted!
+File "db.txt" has been deleted!
 ****************************************
 ```
-#### If this note is last in the database - text file `db.txt` will be removed automatically.
+#### If this note is the last in the database - text file `db.txt` will be deleted automatically.
 
 ---
-### 5. Find the note(-s)  `-f | -find`
-#### Find the note(-s) from the database by next additional arguments:
-`--date` Add a date to the note(-s) that you want to find.
-`--cat` Add a number of transaction category to the note(-s) that you want to find:
+### 5. Find a note(-s)  `-f | -find`
+#### Find a note(-s) from the database by following additional arguments:
+`--date` Add a date to the note(-s) you want to find.
+`--cat` Add a number of transaction category to the note(-s) you want to find:
 - `--cat 1` = "waste"
 - `--cat 2` = "income"
 
-`--amt` Add a positive amount of money to the note(-s) that you want to find.
-* If the number of transaction category is `"waste"`, amount of money will change to a negative number **automatically.**
+`--amt` Add a positive amount of money to the note(-s) you want to find.
+* If the number of transaction category is `"waste"`, the amount of money will change to a negative number **automatically.**
 
 *Searching by [--desc] can be included into the next version of this app* 🤙
-> **You can use 1, 2 or 3 of this arguments for the search.**
-> **Each of this argument will filter notes in the database and then display search result will be displayed in a Terminal.**
+> **You can use 1, 2 or 3 of these arguments for the search.**
+> **Each argument will filter notes in the database and then display search result in the Terminal.**
 #### First of all, I will prepare several notes:
 ```c
 > -create --amt 34.69 --cat 1 --desc Parking fine
@@ -336,10 +336,10 @@ Your current balance is: 7.31
 The notes history has been cleaned!
 
 ****************************************
-The file "db.txt" has been deleted!
+File "db.txt" has been deleted!
 ****************************************
 ```
-#### It also leads to remove text file`db.txt`.
+#### It also leads to the removal of the `db.txt` text file.
 
 ---
 
