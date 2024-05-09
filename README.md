@@ -343,9 +343,13 @@ The file "db.txt" has been deleted!
 
 ---
 
-<br/>
+<br>
 
 Enjoy the Note Manager experience ❤ ❤ ❤
+<br>
 Note Manager ver.1.0.0
+<br>
 Created by Aleksander Zizevskikh
+<br>
 Email: zizevskikh.dev@gmail.com
+<br>
