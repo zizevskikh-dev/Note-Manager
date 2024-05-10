@@ -1,4 +1,4 @@
-from typing import Tuple, List, Union
+from typing import Union, Literal
 import os
 import json
 import datetime
@@ -6,7 +6,7 @@ import datetime
 
 class NoteManager:
     """
-    View for the CLI Note Manager
+    View for the CLI Note Manager.
     Provide CRUD commands, and several addition functions:
         - Find the record(-s) from the database by the parameters;
         - Display current amount of money;
@@ -21,7 +21,7 @@ class NoteManager:
         self.__balance = self.get_current_balance()
 
     # Command methods
-    def create_note(self, cat: str, amt: float, desc: Union[list, str] = "") -> None:
+    def create_note(self, cat: Literal["1", "2"], amt: float, desc: Union[list, None] = "") -> None:
         """
         Create a new record in the database.
         Display a new record.
@@ -72,12 +72,12 @@ class NoteManager:
     def update_note(
             self,
             pr_date: str,
-            pr_cat: str,
+            pr_cat: Literal["1", "2"],
             pr_amt: float,
-            new_cat: str,
+            new_cat: Literal["1", "2"],
             new_amt: float,
-            pr_desc: Union[list, str] = "",
-            new_desc: Union[list, str] = ""
+            pr_desc: Union[list, None] = "",
+            new_desc: Union[list, None] = ""
     ) -> None:
         """
         Update an existing record with the new one and write it into the database.
@@ -135,7 +135,7 @@ class NoteManager:
         db_data["notes"][note_index] = note_new
         self.write_db(db_data=db_data)
 
-        print("The update finished successful!", end="\n\n")
+        print("The update finished successfully!", end="\n\n")
         print("-" * 40)
         print("Before the update:")
         print("-" * 40)
@@ -146,7 +146,7 @@ class NoteManager:
         self.print_notes(data=[note_new])
         self.create_text_document(action="update")
 
-    def delete_note(self, date: str, cat: str, amt: float, desc: Union[list, str] = "") -> None:
+    def delete_note(self, date: str, cat: Literal["1", "2"], amt: float, desc: Union[list, None] = "") -> None:
         """
         Delete a record from the database.
         Display the deleted record.
@@ -189,12 +189,12 @@ class NoteManager:
         check_db = self.check_db_data()[1]
         if not check_db:
             print("*" * 40)
-            print("Database is empty")
+            print("Database is empty!")
             self.delete_text_document()
         else:
             self.create_text_document(action=False)
 
-    def find_notes(self, date: str, cat: str, amt: float) -> None:
+    def find_notes(self, date: str, cat: Literal["1", "2"], amt: float) -> None:
         """
         Find the record(-s) from the database by the next parameters.
         Display the found record(-s).
@@ -302,7 +302,8 @@ class NoteManager:
         template_data = {"notes": []}
         self.write_db(db_data=template_data)
 
-    def write_db(self, db_data) -> None:
+    @staticmethod
+    def write_db(db_data) -> None:
         """
         Write records in the database.
 
@@ -312,7 +313,13 @@ class NoteManager:
         with open("db.json", "w") as file:
             json.dump(obj=db_data, fp=file, indent=4)
 
-    def create_note_template(self, date: str, cat: str, amt: float, desc: str) -> List[dict]:
+    @staticmethod
+    def create_note_template(
+            date: str,
+            cat: Literal["waste", "income"],
+            amt: float,
+            desc: str
+    ) -> list[dict[str, Union[str, float]]]:
         """
         Create a list with the record.
 
@@ -331,7 +338,7 @@ class NoteManager:
         ]
         return template
 
-    def deserialize_db(self) -> dict:
+    def deserialize_db(self) -> dict[Literal["notes"], list]:
         """
         Read JSON file and deserialize a data.
 
@@ -371,7 +378,8 @@ class NoteManager:
             print(f'File "db.txt" has been {action}d!')
             print("*" * 40, end="\n\n")
 
-    def delete_text_document(self) -> None:
+    @staticmethod
+    def delete_text_document() -> None:
         """
         Delete text file 'db.txt'.
         """
@@ -382,10 +390,10 @@ class NoteManager:
             pass
         else:
             print("*" * 40)
-            print('The file "db.txt" has been deleted!')
+            print('File "db.txt" has been deleted!')
             print("*" * 40, end="\n\n")
 
-    def check_db_data(self) -> Tuple[dict, bool]:
+    def check_db_data(self) -> type[dict, bool]:
         """
         Check note(-s) existing.
         Returns record if they exist.
@@ -397,7 +405,8 @@ class NoteManager:
         check_db = True if len(db_data["notes"]) > 0 else False
         return db_data, check_db
 
-    def check_date(self, date: str) -> bool:
+    @staticmethod
+    def check_date(date: str) -> bool:
         """
         Check a value of an argument [--data] from the CLI.
 
@@ -412,12 +421,12 @@ class NoteManager:
             print(error, end="\n\n")
             return False
 
+    @staticmethod
     def check_cat_amt_desc(
-            self,
-            cat: str,
+            cat: Literal["1", "2"],
             amt: float,
-            desc: Union[list, str],
-    ) -> Tuple[str, float, str]:
+            desc: Union[list, str]
+    ) -> tuple[Literal["1", "2"], bool, str] | tuple[Literal["waste", "income"], float, str]:
         """
         Check the positive number of the amount of money.
         Change category value to a string view.
@@ -444,16 +453,15 @@ class NoteManager:
             desc = " ".join(desc)
         return cat, amt, desc
 
+    @staticmethod
     def filter_records(
-            self,
             db_data: dict,
             date: str,
             cat: str,
             amt: float,
             desc: str,
             action: str
-    ) -> Union[None, Tuple[list, int]]:
-
+    ) -> Union[None, tuple[list, int]]:
         """
         Filter records by parameters.
 
@@ -465,6 +473,7 @@ class NoteManager:
         :param action: "update" | "delete"
         :return: A Matching record, and its index | None
         """
+
         data_filtered = [note for note in db_data["notes"] if note[0]["date"] == date]
         if data_filtered:
             data_filtered = [
@@ -527,13 +536,15 @@ class NoteManager:
             else:
                 print(line)
 
-    def parse_db(self, data: list) -> list:
+    @staticmethod
+    def parse_db(data: list) -> list[str]:
         """
         Transform records data to strings.
 
         :param data: A list with the notes
         :return: A list with the string records
         """
+
         lines_array = [
             f"{list(line.keys())[0].capitalize()}: {list(line.values())[0]}"
             for note in data
