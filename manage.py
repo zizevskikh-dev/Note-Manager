@@ -24,7 +24,7 @@ Email: zizevskikh.dev@gmail.com""",
         "-create",
         "--create_note",
         action="store_true",
-        help="""Create the note in the database by next additional arguments:
+        help="""Create the note in the database by following additional arguments:
 [--cat] Add the number of transaction category to the new note:
     --cat 1 = "waste"
     --cat 2 = "income"
@@ -46,47 +46,47 @@ Doesn't require any additional arguments""",
         "-upd",
         "--update_note",
         action="store_true",
-        help="""Update the note from the database by next additional arguments:
-[--date] Add the previous date to the note that you want to update
-[--cat] Add the previous number of transaction category to the note that you want to update:
+        help="""Update the note from the database by following additional arguments:
+[--date] Add the previous date to the note you want to update
+[--cat] Add the previous number of transaction category to the note you want to update:
     --cat 1 = "waste"
     --cat 2 = "income"
-[--amt] Add previous positive amount of money to the note that you want to update
-[--decs] Add the previous description to the note that you want to update ***
-    *** Skip this argument if an updated note doesn't have any description!!!
-[--newcat] Add a new number of transaction category to the note that you want to update:
+[--amt] Add the previous positive amount of money to the note you want to update
+[--decs] Add the previous description to the note you want to update ***
+    *** Skip this argument if an updated note doesn't have any description!
+[--newcat] Add a new number of transaction category to the note you want to update:
     --newcat 1 = "waste"
     --newcat 2 = "income"
-[--newamt] Add a new positive amount of money to the note that you want to update
+[--newamt] Add a new positive amount of money to the note you want to update
         
 Optional argument:
-[--newdesc] Add a new description to the note that you want to update""",
+[--newdesc] Add a new description to the note you want to update""",
     )
     parser.add_argument(
         "-d",
         "-del",
         "--delete_note",
         action="store_true",
-        help="""Delete the note from the database by next additional arguments:
-[--date] Add a date to the note that you want to delete
-[--cat] Add a number of transaction category to the note that you want to delete:
+        help="""Delete the note from the database by following additional arguments:
+[--date] Add a date to the note you want to delete
+[--cat] Add a number of transaction category to the note you want to delete:
     --cat 1 = "waste"
     --cat 2 = "income"
-[--amt] Add a positive amount of money to the note that you want to delete
-[--desc] Add a description to the note that you want to delete ***
-    *** Skip this argument if the deleted note doesn't have any description!!!""",
+[--amt] Add a positive amount of money to the note you want to delete
+[--desc] Add a description to the note you want to delete ***
+    *** Skip this argument if the deleted note doesn't have any description!""",
     )
     parser.add_argument(
         "-f",
         "-find",
         "--find_notes",
         action="store_true",
-        help="""Find the note(-s) from the database by next additional arguments:
-[--date] Add a date to the note(-s) that you want to find
-[--cat] Add a number of transaction category to the note(-s) that you want to find:
+        help="""Find a note(-s) from the database by following additional arguments:
+[--date] Add a date to the note(-s) you want to find
+[--cat] Add a number of transaction category to the note(-s) you want to find:
     --cat 1 = "waste"
     --cat 2 = "income"
-[--amt] Add a positive amount of money to the note(-s) that you want to find
+[--amt] Add a positive amount of money to the note(-s) you want to find
 
 *** Searching by [--desc] can be included into the next version of this app 🤙""",
     )
