@@ -63,7 +63,7 @@ Description: Cashback
 File "db.txt" has been created!
 ****************************************
 ```
-#### `db.json` template content:
+#### Template content in `db.json`:
 ```JS
 {  
     "notes": [  
