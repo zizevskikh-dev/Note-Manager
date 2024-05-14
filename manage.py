@@ -1,7 +1,6 @@
 import argparse
 from views import NoteManager
 
-
 if __name__ == "__main__":
     user = NoteManager()
     parser = argparse.ArgumentParser(
@@ -12,7 +11,7 @@ if __name__ == "__main__":
 Enjoy the Note Manager experience ❤ ❤ ❤ !
 You can see more information and examples in 'README.md' or GitHub:
 https://github.com/howmuchisthe-fish/Note-Manager.git
-Note Manager ver.1.0.0
+Note Manager ver.1.0.1
 Created by Aleksander Zizevskikh, 2024
 Email: zizevskikh.dev@gmail.com""",
         formatter_class=argparse.RawTextHelpFormatter
@@ -164,20 +163,24 @@ Like:
     )
 
     args = parser.parse_args()
+
     if args.create_note:
         user.create_note(cat=args.cat, amt=args.amt, desc=args.desc)
+
     if args.read_notes:
         user.read_notes()
+
     if args.update_note:
         user.update_note(
-            pr_date=args.date,
-            pr_cat=args.cat,
-            pr_amt=args.amt,
-            pr_desc=args.desc,
-            new_cat=args.newcat,
-            new_amt=args.newamt,
-            new_desc=args.newdesc,
+            date_prev=args.date,
+            cat_prev=args.cat,
+            amt_prev=args.amt,
+            desc_prev=args.desc,
+            cat_new=args.newcat,
+            amt_new=args.newamt,
+            desc_new=args.newdesc,
         )
+
     if args.delete_note:
         user.delete_note(
             date=args.date,
@@ -185,9 +188,12 @@ Like:
             amt=args.amt,
             desc=args.desc,
         )
+
     if args.find_notes:
         user.find_notes(date=args.date, cat=args.cat, amt=args.amt)
+
     if args.show_balance:
         user.show_balance()
+
     if args.clear_notes:
         user.clear_notes()

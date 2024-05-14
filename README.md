@@ -103,7 +103,7 @@ Current balance is: 34.69
 ```c
 > python manage.py -read                                 
 ----------------------------------------
-All of your notes:
+Database contains 1 note(-s):
 ----------------------------------------
 
 Date: 2024-05-09
@@ -347,7 +347,7 @@ File "db.txt" has been deleted!
 
 Enjoy the Note Manager experience ❤ ❤ ❤
 <br>
-Note Manager ver.1.0.0
+Note Manager ver.1.0.1
 <br>
 Created by Aleksander Zizevskikh
 <br>
